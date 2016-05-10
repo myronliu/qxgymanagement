@@ -1,0 +1,201 @@
+//*------------------------------------------------*/
+//* 组件样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：暂无
+//*------------------------------------------------*/
+
+//*==========  弹出框  ==========*/
+.show-style {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  opacity: 0.3;
+  z-index: 999;
+}
+
+.content-style {
+  border: 1px solid;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 15%;
+  background-color: #fff;
+  z-index: 1000;
+  position: absolute;
+}
+
+.title-style {
+  background-color: rgb(239,239,239);
+  border-bottom-style: solid;
+  border-bottom-width: 0.1em;
+  border-bottom-color: rgb(206,206,206);
+}
+
+.message-style {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  position: relative;
+  font-size: 12;
+}
+
+
+//*==========  表格组件  ==========*/
+.grid-table {
+  border: solid 1px #ccc;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 13px Arial, sans-serif;
+  width: 100%;
+  margin-top: 5px;
+
+  thead th {
+      background-color: #ddd;
+      border: solid 1px #ccc;
+      color: #336B6B;
+      padding: 10px;
+      /*text-align: left;*/
+      text-shadow: 1px 1px 1px #fff;
+  }
+
+  tbody {
+    td {
+      border-left: solid 1px #ddd;
+      color: #333;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #fff;
+
+      img {
+        max-width: 90px;
+        height: auto;
+        vertical-align: middle;
+        padding: 1px;
+        background-color: #fff;
+        border: solid 1px #CCC;
+      }
+    }
+
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+  }
+
+  tfoot {
+    td {
+      line-height: 20px;
+      padding: 10px;
+    }
+
+    button:disabled {
+      color:#ccc;
+    }
+  }
+
+  button {
+    margin: 0 3px 0 0;
+  }
+
+  .grid-paginate {
+    float: left;
+    width: 40%;
+  }
+
+  .grid-rowcount {
+    float: left;
+  }
+
+  .grid-stats {
+    float: right;
+  }
+}
+
+
+//*==========  Meun Ico Style  ==========*/
+.menu-ico {
+  display: block;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-top: 6px;
+  background: url("../imgs/glyphicons-halflings.png") -267px -1px no-repeat;
+}
+
+.menu-ico-child {
+  @extend .menu-ico;
+  background:url('../imgs/arrow.png') no-repeat 5px center;
+  float: right;
+  margin-top: -20px;
+}
+
+//*==========  Table Operation Button Style  ==========*/
+.operation-center {
+  @extend .clearfix;
+
+  margin: 0 auto;
+}
+
+.operation {
+  @extend .clearfix;
+
+  div {
+    width: 80px;
+    height: 30px;
+    float: left;
+    cursor: pointer;
+
+    p {
+      width: 28px;
+      height: 16px;
+      float: left;
+      margin-top: 10px;
+
+      &a:hover {
+        cursor:pointer;
+      }
+    }
+
+    .look {
+      background: url("../imgs/glyphicons-halflings.png") -85px -120px no-repeat;
+    }
+
+    .edit {
+      background: url("../imgs/glyphicons-halflings.png")   -91px -75px no-repeat;
+    }
+
+    .close {
+         background: url("../imgs/glyphicons-halflings.png")  -375px -1px no-repeat;
+    }
+
+    .open {
+      background: url("../imgs/glyphicons-halflings.png")   -209px -25px no-repeat;
+    }
+
+    .del,.delete {
+      background: url("../imgs/glyphicons-halflings.png") -304px 0px no-repeat;
+    }
+  }
+}
+
+//*============= 页面 ===============*/
+.page-container {
+  //width: $pageWidth;
+}
+
+.page-header {
+  width: $pageWidth;
+
+  a {
+    color:white;
+  }
+
+  nav li {
+    padding: 15px 15px;
+    color: #fff;
+  }
+}

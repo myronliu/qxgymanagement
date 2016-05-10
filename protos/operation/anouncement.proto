@@ -1,0 +1,158 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.operation.stub";
+option java_outer_classname = "AnnouncementProto";
+
+import "../base/base.proto";
+import "../operation/releaseStatus.proto";
+
+service AnnouncementService {
+    //根据查询条件查询平台公告
+    rpc QueryPaging (QueryPagingAnnouncementRequest) returns (QueryPagingAnnouncementResponse) {};
+  
+    //查询平台公告
+    rpc QueryList (QueryListAnnouncementRequest) returns (QueryListAnnouncementResponse) {};
+  
+    //查询平台公告
+    rpc GetAnnouncementById (GetAnnouncementByIdRequest) returns (GetAnnouncementByIdResponse) {};
+  
+    //删除平台公告
+    rpc Remove (RemoveAnnouncementRequest) returns (RemoveAnnouncementResponse) {};
+  
+    //更新平台公告
+    rpc Update (UpdateAnnouncementRequest) returns (UpdateAnnouncementResponse) {};
+  
+    //新增平台公告
+    rpc Create (CreateAnnouncementRequest) returns (CreateAnnouncementResponse) {};
+    
+    //设置置顶
+    rpc UpdateForTopFlag (UpdateForTopFlagRequest) returns (UpdateForTopFlagResponse) {};
+    
+    //批量删除
+    rpc BatchDelete (BatchDeleteRequest) returns (BatchDeleteResponse) {};
+
+}
+
+message Announcement {
+    //公告
+    int64 announcementId = 1;
+    
+    //类型,HD=0:活动;XT=1:系统
+    AnnouncementType announcementType = 2;
+    
+    //浏览次数
+    int32 hits = 3;
+    
+    //发布状态,WFB:未发布;YFB:已发布
+    ReleaseStatus releaseStatus = 4;
+    
+    //公告标题
+    string title = 5;
+    
+    //内容
+    string content = 6;
+    
+    //创建者ID
+    int64 creator = 7;
+    
+    //创建时间
+    string createdTime = 8;
+    
+    //最后修改时间
+    string updatedTime = 9;
+    
+    //最后修改时间起
+    string updateTimeFrom = 10;
+    
+    //最后修改时间止
+    string updateTimeTo = 11;
+    
+    //删除标示
+    string deleteFlag = 12;
+    
+    //登录名
+    string loginName = 13;
+    
+    //置顶flag
+    string topFlag = 14;
+}
+
+message BatchDeleteRequest{
+    repeated int64 announcementIdList=1;
+}
+
+message BatchDeleteResponse{
+    StatusInfo statusInfo = 1;
+}
+
+
+message UpdateForTopFlagRequest{
+    Announcement announcement=1;
+}
+
+message UpdateForTopFlagResponse{
+    StatusInfo statusInfo = 1;
+}
+
+
+message QueryPagingAnnouncementRequest {
+    PagingDto pagingDto = 1;//分页信息
+    Announcement announcement = 2;
+}
+
+message QueryPagingAnnouncementResponse {
+    repeated Announcement announcement = 1;
+    PagingResultDto pagingResultDto = 2;
+    StatusInfo statusInfo = 3;
+}
+
+message QueryListAnnouncementRequest{
+    Announcement announcement=1;
+}
+
+message QueryListAnnouncementResponse{
+    repeated Announcement announcement=1;
+    StatusInfo statusInfo = 2;
+}
+
+message RemoveAnnouncementRequest{
+    Announcement announcement=1;
+}
+
+message RemoveAnnouncementResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message UpdateAnnouncementRequest{
+    Announcement announcement=1;
+}
+
+message UpdateAnnouncementResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message CreateAnnouncementRequest{
+    Announcement announcement=1;
+}
+
+message CreateAnnouncementResponse{
+    StatusInfo statusInfo = 1;
+}
+
+enum AnnouncementType {
+    AnnouncementTypeNULL = 0;
+    HD = 1;//活动
+    XT = 2;//系统
+}
+
+message GetAnnouncementByIdRequest {
+    Announcement announcement = 1;
+}
+
+message GetAnnouncementByIdResponse {
+    Announcement announcement = 1;
+    StatusInfo statusInfo = 2;
+}

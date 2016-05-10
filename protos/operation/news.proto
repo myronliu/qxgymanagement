@@ -1,0 +1,184 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.operation.stub";
+option java_outer_classname = "NewsProto";
+
+import "../base/base.proto";
+import "../operation/releaseStatus.proto";
+
+service NewsService {
+    //根据条件查询
+    rpc QueryPaging (QueryPagingNewsRequest) returns (QueryPagingNewsResponse) {};
+  
+    //查询新闻
+    rpc QueryList (QueryListNewsRequest) returns (QueryListNewsResponse) {};
+    
+    //查询新闻
+    rpc GetNewsById (GetNewsByIdRequest) returns (GetNewsByIdResponse) {};
+  
+    //删除新闻
+    rpc Remove (RemoveNewsRequest) returns (RemoveNewsResponse) {};
+  
+    //更新新闻
+    rpc Update (UpdateNewsRequest) returns (UpdateNewsResponse) {};
+  
+    //新增新闻
+    rpc Create (CreateNewsRequest) returns (CreateNewsResponse) {};
+    
+    //设置置顶
+    rpc UpdateForTopFlag (UpdateForNewsTopFlagRequest) returns (UpdateForNewsTopFlagResponse) {};
+    
+    //批量删除
+    rpc BatchNewsDelete (BatchNewsDeleteRequest) returns (BatchNewsDeleteResponse) {};
+    
+    
+}
+
+message BatchNewsDeleteRequest {
+    repeated int64 newsIdList = 1;
+}
+
+message BatchNewsDeleteResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message UpdateForNewsTopFlagRequest {
+    News news = 1;
+}
+
+message UpdateForNewsTopFlagResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message News {
+    int64 newsId = 1;//新闻ID
+    ArticleType articleType = 2;//类型，媒体报道:'MTBD'
+    int32 viewTimes = 3;//浏览次数
+    int32 sort = 4;//文章排序值
+    ReleaseStatus releaseStatus = 5;//发布状态,WFB:未发布;YFB:已发布
+    string title = 6;//文章标题
+    string createTime = 7;//创建时间
+    string updatedTime = 8;//更新时间
+    string releaseTime = 9;//发布时间
+    string source = 10;//文章来源
+    string summary = 11;//摘要
+    string imageCode = 12;//封面图片编码
+    int64 creater = 13;//创建者ID
+    string newsImg = 14;//新闻图片
+    string position = 15;//是否置顶
+    string newsLink = 16;//新闻链接
+    string createTimeFrom = 17;//创建时间起
+    string createTimeTo = 18;//创建时间止
+    string deleteFlag = 19;//删除标示
+    string loginName = 20;//发布者名字
+    string onlineTime = 21;//上线时间
+    string offlineTime = 22;//下线时间
+}
+
+message QueryPagingNewsRequest {
+    PagingDto pagingDto = 1;//分页信息
+    News news = 2;
+}
+
+message QueryPagingNewsResponse {
+    repeated News news = 1;
+    PagingResultDto pagingResultDto = 2;
+    StatusInfo statusInfo = 3;
+}
+
+message QueryListNewsRequest{
+    News news=1;
+}
+
+message QueryListNewsResponse{
+    repeated News news=1;
+    StatusInfo statusInfo = 2;
+}
+
+message RemoveNewsRequest{
+    News news=1;
+}
+
+message RemoveNewsResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message UpdateNewsRequest{
+    News news=1;
+}
+
+message UpdateNewsResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message CreateNewsRequest{
+    News news = 1;
+}
+
+message CreateNewsResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message GetNewsByIdRequest {
+    News news = 1;
+}
+
+message GetNewsByIdResponse {
+    News news = 1;
+    StatusInfo statusInfo = 2;
+}
+
+
+enum ArticleType {
+    ArticleTypeNULL = 0;
+    ZCYDL = 1;//注册与登录
+    CZYTX = 2;//充值与提现
+    XMFK = 3;//项目风控
+    BXDB = 4;//本息担保
+    ZHYAQ = 5;//账户与安全
+    TZYHK = 6;//投资与回款
+    HZHB = 7;//合作伙伴
+    GCTM = 8;//过程透明
+    FLHG = 9;//法律合规
+    ZJAQ = 10;//资金安全
+    PTZH = 11;//平台账户
+    WYLC = 12;//我要理财
+    WYJK = 13;//我要借款
+    LXHFY = 14;//利息和费用
+    PTJS = 15;//平台介绍
+    MCJS = 16;//名词解释
+    XSZY = 17;//新手指引
+    AQBZ = 18;//安全保障
+    LXWM = 19;//联系我们
+    ZXNS = 20;//招贤纳士
+    HZJG = 21;//合作机构
+    ZJGW = 22;//专家顾问
+    GSJJ = 23;//公司简介
+    GLTD = 24;//管理团队
+    SHZR = 25;//社会责任
+    MTBD = 26;//媒体报道
+    HLWJRYJ = 27;//互联网金融研究
+    DBMS = 28;//担保模式
+    RZMS = 29;//融租模式
+    ZQMS = 30;//债权模式
+    HZJRJG = 31;//合作金融机构
+    XSFKTX = 32;//信审风控体系
+    CFCAZLHZ = 33;//CFCA战略合作
+    ZCFGBZ = 34;//政策法规保障
+    GSZZ = 35;//公司资质
+    WDHYZX = 36;//网贷行业资讯
+    GSDT = 37;//公司动态
+    HTQR = 38;//合同确认
+    FBGG = 39;//发标公告
+    QXYS = 40;//取现演示
+    ZRCZYS = 41;//转让操作演示
+    CJWTQA = 42;//常见问题Q&A
+    ZXDT = 43;//最新动态
+}
+
+
+
+

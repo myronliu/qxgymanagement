@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= typeof title === 'undefined' ? '收银台': title %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+
+  <link rel="icon" href="/imgs/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+  <!-- 日期选择控件 -->
+  <link rel="stylesheet" type="text/css" href="/js/laydate/need/laydate.css">
+  <link rel="stylesheet" type="text/css" href="/js/laydate/skins/default/laydate.css">
+
+  <style type="text/css" media="screen">
+  /* 保持样式与bootstrap兼容 */
+  .laydate_body .laydate_bottom{
+      box-sizing: content-box;
+  }
+  </style>
+</head>
+<body>
+  <div id="react-body-container"><%- reactOutput %></div>
+</body>
+
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/js/tinymce/tiny_mce.js"></script>
+<script type="text/javascript" src="/js/laydate/laydate.js"></script>
+<script type="text/javascript" src="/js/underscore-min.js"></script>
+
+<script><%- typeof stateData === 'undefined'?'':stateData%></script>
+
+<!-- build:js-vendor -->
+<script type="text/javascript" src="/vendor.bundle.js"></script>
+<!-- endbuild -->
+
+<!-- build:js -->
+<script type="text/javascript" src="/bundle.js"></script>
+<!-- endbuild -->
+
+<script type="text/javascript" src="/js/react-bootstrap.min.js"></script>
+
+</html>

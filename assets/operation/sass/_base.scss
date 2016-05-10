@@ -1,0 +1,280 @@
+//*------------------------------------------------*/
+//* 运营平台基础样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：用于提供运营平台基础通用样式
+//*------------------------------------------------*/
+
+//*==========  变量  ==========*/
+//
+//* 布局 */
+$contentWidth: 1200px;
+$leftSectionWidth: 260px;
+$mainSectionWidth: $contentWidth - $leftSectionWidth;
+$sectionPanelWidth: $mainSectionWidth - 10;
+$sectionTableWidth: 100%;
+
+//* 配色 */
+$themeColor: #FA8810; // 主题颜色
+$ftColor: #878787;    // 主要字体颜色
+$bgColor: #fff;       // 主要背景色
+$emColor: #FB373F;    // 重点显示颜色
+
+$borderColor: #CDD4D7;
+$lineColor: #D8DCDF;
+
+$titleColor: #1C1C1C;   // 标题颜色
+$titleBgColor: #EDEDED;
+
+$activeColor: #FFFFFF;
+$activeBgColor: #5693E6;
+
+$disabledBgColor: #B1B1B1;
+
+$blueLinkColor: #5A95E6;
+
+//* 字体 */
+$titleFontSize: 18px;
+$fieldFontSize: 14px;
+$baseFontSize: 12px;    // 基础字体大小
+
+//* 按钮 */
+$btnRadius: 2px;
+$btnFontSize: 18px;
+$btnColor: #FF8E02;   // 按钮颜色
+$disabledBtnColor: #BDBDBD; // 失效按钮颜色
+
+//* 表单 */
+$fieldWidth: 260px;
+
+//* 验证 */
+$errorColor: red;
+$warnColor: #FC4106;
+
+/*==========  Mixins  ==========*/
+
+// 提供跨浏览器RGBa背景
+// 参数为RABa颜泽, e.g. rgba(0, 0, 0, 0.5)
+@mixin rgba-background($color){
+    @include filter-gradient($color, $color);
+    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
+        background: transparent;
+ 
+        // set filter as none for IE9+, because IE9+ supprot RGBa
+        :root & {
+        filter: none\0/IE9;}
+    }
+    background: $color;
+}
+
+// * icon背景 */
+@mixin icon-background($url) {
+  background: image-url(icon/#{$url}) no-repeat center;
+}
+
+//* 边框 */
+@mixin solid-border($color: $borderColor, $direction: none){
+  @if $direction == none {
+    border: solid 1px $color;
+  } @else {
+    border-#{$direction}: solid 1px $color;
+  }
+}
+
+// * 按钮 */
+@mixin button-function($top:0, $right:0, $bottom:0, $left:0, $width:30px, $height:20px, $bgcolor:#FF9A0F, $fontcolor:#fff) {
+  position: absolute;
+  top:$top;
+  left:$left;
+  bottom:$bottom;
+  right:$right;
+  background-color:$bgcolor;
+  height:$height;
+  width:$width;
+  border: none;
+  border-radius: 3px;
+  color: $fontcolor;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+@mixin titleFont($size: $titleFontSize, $color: $titleColor) {
+  color: $color;
+  font-size: $size;
+}
+
+//*==========  基础元素样式  ==========*/
+
+body {
+  font: #{$baseFontSize + 2}/1.5 microsoft yahei;
+  padding: 0;
+  margin: 0;
+  color: $ftColor;
+  background: $bgColor;
+  // overflow-x: hidden;
+}
+
+input, textarea, select {
+  padding: 0 5px;
+  font-size: $fieldFontSize;
+}
+
+input[type="text"], select {
+  height: 30px;
+  border: 1px solid #E1E1E1;
+  width: $fieldWidth - 10;
+  line-height: 30px;
+  color: #959595;
+  border-radius: 3px;
+
+  &.lagre { width:340px !important; }
+  &.lagre-s { width:150px !important; }
+  &.medium { width:83px !important; }
+  &.small { width: 33px !important; }
+}
+
+select {
+  width: $fieldWidth;
+}
+
+input[type="button"]{
+  cursor:pointer;
+}
+
+em {
+  color: $emColor;
+  font-style: normal;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+}
+
+a.blue {
+  color: $blueLinkColor;
+}
+
+a:hover {
+  color: #f63;
+}
+
+//*==========  基础样式  ==========*/
+
+/* 使float的元素可以撑开父级div */
+.clearfix:after { 
+  visibility: hidden; 
+  display: block; 
+  font-size: 0; 
+  content: "."; 
+  clear: both; 
+  height: 0; 
+} 
+
+* html .clearfix{zoom: 1;}
+
+*:first-child + html .clearfix{zoom: 1;}
+
+@for $i from 1 to 10 {
+  .f#{12 + $i}{
+    font-size: $baseFontSize + $i;
+  }
+}
+
+.fl { float: left; }
+.fr { float: right; }
+.hide { display: none; }
+.show { display: ""; }
+
+//*==========  通用组件样式类  ==========*/
+// 容器
+.container {
+  margin: 0px auto;
+}
+
+.panel {
+  @extend .clearfix;
+  @include solid-border($borderColor);
+
+  &>.title {
+    @extend .clearfix;
+    @include solid-border($borderColor, bottom);
+
+    line-height: 30px;
+    padding: 10px 20px;
+    background-color: #FFFEFC;
+    color:#333;
+
+    .caption {
+      @include float-left;
+      @include titleFont;
+
+    }
+
+    .action {
+      @include float-right;
+    }
+  }
+
+  &>.content {
+    @extend .clearfix;
+  }
+}
+
+// 按钮
+.btn {
+  @include border-radius($btnRadius);
+  border: 2px solid;
+  padding: 5px 20px;
+  font-size: $btnFontSize;
+
+  &.disabled {
+    cursor: default;
+  }
+}
+
+.btn-primary {
+  @extend .btn;
+  // border-color: $borderColor;
+  // background-color: $btnColor;
+  // border-color: $btnColor;
+  // color: white;
+
+  &:hover {
+    background-color: #4cb0f9;
+    border-color: #4cb0f9;
+  }
+
+  &:active {
+    // background: #df4c04;
+    // border-color: #df4c04;
+  }
+}
+
+.btn-secondary {
+  @extend .btn;
+  background-color: white;
+
+  &:hover {
+    background-color: #4cb0f9;
+    border-color: #4cb0f9;
+  }
+}
+
+.btn-gray {
+  border-color: $ftColor;
+  color: $ftColor;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.center-align {
+  text-align: center;
+}

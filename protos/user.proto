@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.hry.stub";
+option java_outer_classname = "UserProto";
+
+import "base.proto";
+
+service UserService {
+
+    //根据uerId获取用户信息
+    rpc GetUser(LongHolder) returns (UserResponse) {};
+    
+    //添加用户
+    rpc AddUser(User) returns (UserIdResponse) {};
+    
+    //删除用户
+    rpc RemoveUser(User) returns (BaseResponse) {}
+
+}
+
+
+message User {
+    
+    //用户ID
+    int64 userId = 1;
+    //用户登录账号
+    string loginName = 2;
+    //用户登录密码
+    string password = 3;
+    //手机号码
+    string cellPhone = 4;
+    //邮箱
+    string email = 5;
+    //用户类型
+    UserType userType = 6;
+    //状态
+    UserStatus userStatus = 7;
+    //注册来源
+    UserSource userSource = 8;
+    //注册时间
+    string registrationTime = 9;
+    //担保方
+    bool isGuarantee = 10;
+    //当日提现密码输入错误次数
+    int32 wrongPasswordTimes = 11;
+    //是否第一次登陆系统
+    bool isFirstLogin = 12;
+    //是否删除
+    bool isDeleted = 13;
+}
+
+enum UserType {
+    //自然人
+    NATURALPERSON = 0;
+    //非自然人
+    OTHERS = 1;
+}
+
+enum UserStatus {
+    EFFECTIVE = 0;      //启用
+    LOCKED = 1;         //锁定
+    BLACKLIST = 2;      //黑名单
+}
+
+enum UserSource {
+    REGISTERED = 0;     //注册
+    MANUALADD = 1;      //后台添加
+}
+
+
+
+message UserResponse {
+    StatusInfo statusInfo = 1;
+    User user = 2;
+}
+
+message UserIdResponse {
+    StatusInfo statusInfo = 1;
+    int64 userId = 2;
+}

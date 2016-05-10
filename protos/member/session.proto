@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.member.stub";
+option java_outer_classname = "SessionProto";
+
+import "../base/base.proto";
+
+service SessionService {
+
+    //根据token从Session中获取用户信息
+    rpc GetCurrentUser (GetCurrentUserRequest) returns (GetCurrentUserResponse) {};
+    
+    //验证码验证
+    rpc AuthCode (AuthCodeRequest) returns (AuthCodeResponse) {};
+}
+
+message CurrentUserDto {
+    //用户ID
+    int32 hryId = 1;
+    
+    //用户登录账号
+    string loginName = 2;
+}
+
+message GetCurrentUserRequest {
+    string token = 1;
+}
+ 
+message GetCurrentUserResponse {
+    StatusInfo statusInfo = 1;
+    CurrentUserDto curUser = 2;
+}
+
+
+message AuthCodeRequest{
+	// 会话ID
+	string token = 1;
+	
+	// 验证码
+	string code = 2;
+	
+	// 验证码类型
+	string codeType = 3;
+}
+
+message AuthCodeResponse {
+    StatusInfo statusInfo = 1;
+    bool auth = 2;
+}

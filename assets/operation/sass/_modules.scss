@@ -1,0 +1,175 @@
+//*------------------------------------------------*/
+//* 运营平台模块样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：用于提供运营平台模块样式
+//*------------------------------------------------*/
+
+//*==========  全局模块  ==========*/
+
+//* 导航菜单页面布局 */
+.nav-layout {
+  $parentIconWidth: 44px;
+  $iconWidth: 40px;
+
+  padding: 20px 0 0 0;
+
+  .left-section {
+    float: left;
+    width: $leftSectionWidth;
+  }
+
+  .main-section {
+    float: left;
+    width: $mainSectionWidth - 10;
+    position: relative;
+    margin-left: 10px;
+    // padding: 0 0 50px 0px;
+  }
+}
+
+//* 页面导航菜单 */
+.page-nav {
+  $navWidth: 252px;
+
+  min-height: 80px;
+  width: 252px;
+  border: 1px solid $borderColor;
+
+  .nav-parent-top {
+    width: $navWidth;
+    height: 50px;
+    background: image-url("nav-ico-top.png") no-repeat;
+  }
+
+  .nav-ico{
+    width: 44px;
+    height: 28px;
+    display: block;
+    float: left;
+
+    &.ico-1 { background: image-url("nav-ico1.png") no-repeat center; }
+    &.ico-2 { background: image-url("nav-ico2.png") no-repeat center; }
+    &.ico-3 { background: image-url("nav-ico3.png") no-repeat center; }
+  }
+
+  .nav-parent {
+    width: $navWidth;
+    color: #284879;
+    font-size: 18px;
+    cursor: pointer;
+
+    &>div {
+      padding: 10px 0 0 10px;
+      height: 40px;
+      line-height: 30px;
+    }
+  }
+
+  .nav-child {
+    background-color: #FBFBFB;
+    font-size: 16px;
+    width: $navWidth;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+
+    &:hover{
+      a {
+        color: #ff974a;
+      }
+    }
+
+    &.active {
+      background-color: #ff974a;
+      a {
+          color: #fff;
+      }
+
+      i {
+        background: image-url("nav-ico-arrow-active.png") no-repeat center; 
+      }
+    }
+
+    &>a {
+      color: #7A7A7A;
+    }
+
+    &>i {
+      display: block;
+      width: 40px;
+      height: 23px;
+      float: left;
+      background: image-url("nav-ico-arrow.png") no-repeat center;
+    }
+  }
+}
+
+
+//*==========  借款模块  ==========*/
+
+//* 还款弹出框样式 */
+.module-loan {
+  &.repay-modal{
+    .content{
+      padding: 20px 0;
+      font-size: 16px;
+      color: #818183;
+    }
+
+    .seperator-line {
+      border-top: 1px dashed #E6E7E8;
+      position: relative;
+      top: 30px;
+    }
+
+    .notify-lack-of-balance {
+      i {
+        float: left;
+        width: 30px;
+        height: 30px;
+        margin-left: 160px;
+        background: image-url("error-mn.png") no-repeat center;
+      }
+
+      .message {
+        float: left;
+        color: black;
+        margin: 3px 10px;
+      }
+    }
+
+    .refund {
+      width: 520px;
+      margin:0 auto;
+      min-height: 46px;
+      font-size: 16px;
+
+      .refund-left {
+        float: left;
+        width: 43%;
+        text-align: left;
+      }
+
+      .refund-right {
+        float: right;
+        width: 53%;
+        text-align: right;
+      }
+
+      .btn-charge {
+        @include button-function(none,0px,12px,146px,97px,34px,#FB8200);
+      }
+
+      .btn-back {
+        @include button-function(none,0px,12px,312px,97px,34px,#dbdada,#898989);
+      }
+      
+      .tipimg {
+        width: 21px;
+        vertical-align: middle;
+      }
+    }
+  }
+}

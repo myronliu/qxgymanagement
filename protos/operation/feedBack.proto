@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.operation.stub";
+option java_outer_classname = "FeedBackProto";
+
+import "../base/base.proto";
+
+service FeedBackService {
+
+    //根据条件查询用户反馈
+    rpc QueryPaging (QueryPagingFeedBackRequest) returns (QueryPagingFeedBackResponse) {};
+  
+    //查询用户反馈
+    rpc QueryList (QueryListFeedBackRequest) returns (QueryListFeedBackResponse) {};
+  
+    //查询用户反馈
+    rpc GetFeedBackById (GetFeedBackByIdRequest) returns (GetFeedBackByIdResponse) {};
+  
+    //新增广告
+    rpc Create (CreateFeedBackRequest) returns (CreateFeedBackResponse) {};
+
+}
+
+message FeedBack {
+   int64 feedBackId = 1;//反馈信息id
+   int64 uid = 2;//用户id
+   string content = 3;//用户反馈信息
+   string createdTime = 4;//创建时间
+   string updatedTime = 5;//最后更新时间
+}
+
+message QueryPagingFeedBackRequest {
+    PagingDto pagingDto = 1;//分页信息
+	FeedBack feedBack = 2;
+}
+
+message QueryPagingFeedBackResponse {
+    repeated FeedBack feedBack = 1;
+    PagingResultDto pagingResultDto = 2;
+    StatusInfo statusInfo = 3;
+}
+
+message QueryListFeedBackRequest{
+    FeedBack feedBack = 1;
+}
+
+message QueryListFeedBackResponse{
+    repeated FeedBack feedBack = 1;
+    StatusInfo statusInfo = 2;
+}
+
+message CreateFeedBackRequest{
+    FeedBack feedBack = 1;
+}
+
+message CreateFeedBackResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message GetFeedBackByIdRequest {
+    FeedBack feedBack = 1;
+}
+
+message GetFeedBackByIdResponse {
+	FeedBack feedBack = 1;
+    StatusInfo statusInfo = 2;
+}

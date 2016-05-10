@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.stub.base";
+option java_outer_classname = "BaseProto";
+
+message IntHolder {
+    int32 value = 1;
+}
+
+message LongHolder {
+    int64 value = 1;
+}
+
+message DoubleHolder {
+    double value = 1;
+}
+
+message BooleanHolder {
+    bool value = 1;
+}
+
+message StringHolder {
+    string value = 1;
+}
+
+message StatusInfo {
+    int32 status = 1;
+    string message = 2;
+}
+
+message BaseResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message PagingDto{
+	/** 当前页数 */
+	int32 curPage = 1;
+	
+	/** 每页条数 */
+	int32 pageSize = 2;
+}
+
+message PagingResultDto{
+	/** 总条数 */
+	int32 itemCount = 1;
+}
+
+
+
+
+
+

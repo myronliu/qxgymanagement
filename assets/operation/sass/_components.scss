@@ -1,0 +1,534 @@
+//*------------------------------------------------*/
+//* 运营平台组件样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：用于提供运营平台组件样式
+//*------------------------------------------------*/
+
+//*==========  按钮  ==========*/
+
+//*==========  页面块面板  ==========*/
+.section-panel {
+  border: 1px solid $borderColor;
+  padding: 15px 15px;
+}
+
+.section-head {
+  height: 25px;
+  border-bottom: 1px solid $borderColor;
+  padding:5px 0 10px 0;
+  color: $titleColor;
+  font-size: $titleFontSize;
+
+  .left {
+    float: left;
+    font-weight: bold;
+    margin-left: -10px;
+
+    .title > * {
+      float:left;
+    }
+
+    .title > label {
+      line-height: 20px;
+      padding: 0px 5px;
+    }
+  }
+
+  .right {
+    float: right;
+
+    .action > * {
+      float: left;
+    }
+  }
+}
+
+//*==========  蒙板样式  ==========*/
+.mask-panel {
+  $iconSize: 60px;
+
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  pointer-events: auto;
+  @include rgba-background(rgba(0, 0, 0, 0.3));
+  @include transition(opacity 1s ease-in);
+
+  .content {
+    width: 360px;
+    padding: 20px;
+    position: relative;
+    margin: 15% auto;
+    padding-bottom: 5px;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  li.icon {
+    display: table;
+    position: relative;
+    width: 100%;
+
+    &>div{
+      vertical-align: middle;
+      display: table-cell;
+    }
+
+    i {
+      width: $iconSize;
+      height: $iconSize;
+      padding: 20px;
+
+      &.loading {
+        background: image-url('loading.gif') no-repeat center;
+      }
+
+      &.success {
+        background: image-url('success.png') no-repeat center;
+      }
+
+      &.error {
+        background: image-url('error.png') no-repeat center;
+      }
+    }
+  }
+
+  li.message {
+    padding: 5px 20px;
+  }
+
+  li.caption {
+    i {
+      text-align: right;
+
+      &.hide {
+        display: none !important;
+      }
+    }
+
+    i.close {
+      display: block;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: image-url('modal-close.png') no-repeat center;
+      right: -13px;
+      top: -13px;
+      cursor: pointer;
+    }
+  }
+}
+
+//*==========  表格样式  ==========*/
+.section-table {
+  width: $sectionTableWidth;
+  overflow-x: auto;
+
+  &>table {
+    width: 100%;
+  }
+
+  &>table>thead>tr>th {
+    text-align: center;
+    font-size: 16px;
+    color: #4A4C4B;
+    background-color: $titleBgColor;
+    border-bottom: 1px solid $lineColor;
+    line-height: 39px;
+  }
+
+  &>table>tbody>tr>td {
+    text-align: center;
+    width: auto;
+    border-bottom: 1px solid $lineColor;
+    height: 45px;
+  }
+}
+
+.table-pager {
+  margin: 15px 0 10px 0;
+  height: 35px;
+
+  .table-paginate {
+    float: left;
+    ul {
+      @extend .clearfix;
+    }
+
+    li {
+      float: left;
+      border: 1px solid $lineColor;
+      padding: 3px 10px;
+      margin: 2px 3px;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: default;
+        color: #bbbbbb;
+        background: #eaeaea;
+      }
+    }
+  }
+
+  .table-stats {
+    @extend .clearfix;
+    float: left;
+    padding: 5px 20px;
+  }
+}
+
+div[data='no-data'] {
+  min-height: 120px;
+}
+
+//*==========  查询框样式  ==========*/
+.search-panel {
+  padding: 5px 0 25px 0;
+
+  input[type="text"], select{
+    width: 220px;
+
+    &.splited-field {
+      width: 100px;
+    }
+  }
+
+  .field-spliter {
+    width: 20px;
+    padding: 0 3px;
+  }
+
+  .formLabel {
+    width: 100px;
+  }
+
+  .btn-search,.btn-export {
+    color: #666666;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    background-color: $titleBgColor;
+    border: 1px solid $borderColor;
+    border-radius: 3px;
+    margin: 0 5px;
+  }
+}
+
+//*==========  Tab框样式  ==========*/
+.tab-panel {
+  text-align: center;
+  height: 41px;
+  border-bottom: 1px solid $lineColor;
+
+  li {
+    float: left;
+    padding: 0 20px;
+    margin-right: 5px;
+    height: 41px;
+    line-height: 41px;
+    background-color: $titleBgColor;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      color: $activeColor;
+      background-color: $activeBgColor;
+    }
+  }
+
+  .active {
+    color: $activeColor;
+    background-color: $activeBgColor;
+  }
+}
+
+//*==========  提示框样式  ==========*/
+.notify-panel {
+  $iconSize: 65px;
+
+  text-align: center;
+  padding: 30px 0;
+
+  &>ul {
+    @extend .clearfix;
+    margin: 0 auto;
+    width: 100%;
+    line-height: 30px;
+  }
+
+  &>ul>li {
+    float: left;
+
+    &>div {
+      padding: 20px;
+    }
+  }
+
+  li.icon {
+    display: table;
+    position: relative;
+    width: 30%;
+
+    &>div{
+      vertical-align: middle;
+      display: table-cell;
+    }
+
+    i {
+      width: $iconSize;
+      height: $iconSize;
+      position: relative;
+      top: -50%;
+
+      &.loading {
+        background: image-url('loading.gif') no-repeat center;
+      }
+
+      &.success {
+        background: image-url('success.png') no-repeat center;
+      }
+
+      &.error {
+        background: image-url('error.png') no-repeat center;
+      }
+    }
+  }
+
+  li.content {
+    width: 70%;
+
+    &>div {
+      @extend .clearfix;
+      text-align: left;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+//*==========  模态框样式  ==========*/
+.modal-panel {
+  padding: 15px 15px;
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1500;
+  pointer-events: auto;
+  overflow: auto;
+  // background: rgba(0, 0, 0, 0.8);
+  // transition: opacity 1s ease-in;
+  @include rgba-background(rgba(0, 0, 0, 0.6));
+  @include transition(opacity 1s ease-in);
+
+  &>div>.caption {
+    height: 40px;
+    background-color: #e2e2e2;
+    text-align: center;
+    position: relative;
+    line-height: 40px;
+    border-radius:5px;
+    font-size: 18px;
+
+    &>.close {
+      display: block;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: image-url('modal-close.png') no-repeat center;
+      right: -13px;
+      top: -13px;
+      cursor: pointer;
+    }
+  }
+
+  &>div>.content {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 20px;
+    color: black;
+  }
+}
+
+//*==========  对话框样式  ==========*/
+.sys-modal-dialog {
+  $iconSize: 65px;
+
+  .content {
+    @extend .clearfix;
+    min-height: 100px;
+    padding: 30px;
+    width: 420px !important;
+    text-align: center;
+
+    &>ul {
+      @extend .clearfix;
+    }
+
+    &>ul>li {
+      float: left;
+      margin-left: 20px;
+    }
+  }
+
+  .icon>i {
+    width: $iconSize;
+    height: $iconSize;
+
+    &.success {
+      background: image-url('success.png') no-repeat center;
+    }
+
+    &.error {
+      background: image-url('error.png') no-repeat center;
+    }
+  }
+
+  .message {
+    color: black;
+    font-size: 28px;
+    line-height: 60px;
+  }
+}
+
+//*==========  表单中元素样式  ==========*/
+$nsFormLabelWidth: 156px;
+
+.form-panel-base {
+  min-height: 300px;
+  position:relative;
+
+  .title {
+    font-size:16px;
+    letter-spacing: 1px;
+    padding: 0 20px;
+    line-height: 35px;
+    width: $contentWidth - 42;
+    left: 0;
+    color: #525354;
+    background-color: #E8E9EB;
+  }
+
+  .content {
+    margin: 15px 0  40px 0;
+  }
+}
+
+.form-panel {
+  @extend .form-panel-base;
+
+  border: 1px solid #D4D7DA;
+}
+
+.form-panel-noborder {
+  @extend .form-panel-base;
+  
+  border: 0px;
+}
+
+form.page-form{
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 36px;
+  margin-top: 13px;
+
+  .fluid{
+    float:left; 
+  }
+
+  .form-group {
+    padding: 10px 0 5px 0;
+    
+    label {
+      color: #626262;
+      letter-spacing: 1px;
+      min-width: $nsFormLabelWidth;
+      display: inline-block;
+      text-align: right;
+      *height:66px;
+    }
+  }
+}
+
+.btn-submit {
+  @include border-radius($btnRadius); 
+
+  background-color: $btnColor;
+  color: #fff;
+
+  &.disabled {
+    background-color: $disabledBtnColor;
+    color: #eee;
+    cursor: default;
+  }
+}
+
+// 货币表单域
+.currency-span {
+  input.form-input {
+    padding-right: 20px;
+    width: 230px;
+  }
+  
+  .tag {
+    position: relative;
+    left: -25px;
+  }
+}
+
+//*==========  提示相关样式  ==========*/
+
+// 表单验证提示
+.hint {
+  &.required {
+    color: red;
+  }
+
+  &.validate,&.form,&.info {
+    display: none;
+
+    position: relative;
+    padding-left: 10px;
+
+    &.below {
+      &.show { display: block; }
+      padding-left: 0px;
+      left: $nsFormLabelWidth;
+    }
+  }
+
+  &.validate {
+    color: $warnColor;
+    &.show { display: ""; }
+  }
+
+  &.form {
+    color: $warnColor;
+    text-align: center;
+    padding: 10px 0;
+    left: 0px;
+    &.show { display: block; }
+  }
+
+  &.info {
+    display: "";
+
+    &.below {
+      display: block;
+    }
+    
+    &.hide { display: none; }
+  }
+}

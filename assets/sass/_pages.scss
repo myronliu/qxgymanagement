@@ -1,0 +1,111 @@
+//*------------------------------------------------*/
+//* 页面样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：页面样式
+//*------------------------------------------------*/
+
+//* 登录页面 */
+.login-panel{
+  width:420px;
+  font:11px/1.5em 'Microsoft YaHei' ;
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-left:-210px;
+  margin-top:-185px;
+
+  h2{
+    height:45px;
+    font-size:20px;
+    font-weight:normal;
+  }
+
+  .title{
+    border-radius:8px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  .left{
+    border-right:1px solid #ccc;
+    height:100%;
+    padding-right: 20px; 
+  }
+
+  .center{
+    text-align: center;
+  }
+}
+
+.login-box{
+  height:260px;
+  border:1px solid #fff; 
+  color:#000; 
+  border-radius:8px;
+  background: white;
+  box-shadow:0 0 15px #222; 
+  background: -moz-linear-gradient(top, #fff, #efefef 8%);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#f6f6f6), to(#f4f4f4));
+
+  .title{
+    background: #ccc;
+  }
+
+  .caption{
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 20px 0px 20px;
+  }
+
+  .error-message{
+    color: red;
+    font-size: 14px;
+    padding: 5px;
+    display: none;
+  }
+}
+
+.login-form{
+  padding:0 20px;
+
+  .input-group{
+    margin: 10px 0;
+  }
+
+  .submit-button{
+    text-align: center;
+
+    input{
+      width: 100%;
+    }
+  }
+
+  .verify-code{
+    display: none;
+  }
+}
+
+.copy-right{
+  text-align: center;
+  padding: 20px 0;
+}
+
+
+//* 活动相关页面，包括活动查询、活动编辑、活动规则查询及编辑等页面 */
+.activity-rule-config .rule-grid {
+  td {
+    vertical-align: top;
+  }
+
+  ul.rule-column li {
+    height: 23px;
+  }
+
+  .operation-center {
+    width: 180px;
+  }
+}

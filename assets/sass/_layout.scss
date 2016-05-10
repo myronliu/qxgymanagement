@@ -1,0 +1,102 @@
+//*------------------------------------------------*/
+//*   Layout Rules
+//*------------------------------------------------*/
+
+//*==========  Base  ==========*/
+
+.l-container {
+	@extend .container;
+	
+	width: $pageWidth;
+}
+
+//*==========  Header  ==========*/
+
+.l-header {
+  @extend .l-container;
+}
+
+//*==========  Content  ==========*/
+
+.l-content {
+  @extend .l-container, .clearfix;
+}
+
+//*==========  Footer  ==========*/
+.l-footer {
+  @extend  .l-container;
+}
+
+.bs-header {
+  line-height: 70px;
+  background:url('../imgs/hry_logo.png') no-repeat left center;
+  box-shadow:0px 9px  5px #DDDDDD;
+
+  a,lable {
+    color: #fff;
+    font-family: "微软雅黑";
+    text-underline:none;
+  }
+
+  .header_title{
+    font-size: 20px;
+
+    &:hover {
+        text-decoration: none;
+    }
+  }
+
+  .header-right {
+    text-align: right;
+    a:hover {
+      text-decoration: none;
+    }
+
+    img {
+      vertical-align: middle;
+      border-radius: 5px;
+      box-shadow:0 0 10px;  
+      &:hover {
+        box-shadow:0 0 10px #0CC;
+      }
+    }
+
+    span{
+      vertical-align: middle;
+    }
+
+    .caret {
+      background:url('../imgs/arrow.png') no-repeat 5px center;
+    }
+  }
+}
+
+.menustyle {
+  line-height: 43px;
+  padding: 3px;
+  font-size: 15px;
+  border-bottom:1px dashed  #EEEEEE;
+  padding-left: 24px;
+
+  &:hover {
+    background-color:#F0F0F0;
+  }
+}
+
+.form-horizontal {
+  padding:0px 0 0 10px;
+
+  .row {
+    border-bottom: 1px dashed #EEEEEE;
+    line-height: 50px;
+  }
+}
+
+.page-title-img {
+  div {
+    background: url("../imgs/glyphicons-halflings.png") 1px -89px no-repeat;
+    width: 20px;
+    height: 24px;
+    float: left;
+  }
+}

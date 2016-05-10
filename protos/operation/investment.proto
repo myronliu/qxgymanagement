@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.operation.stub";
+option java_outer_classname = "InvestmentProto";
+
+import "../base/base.proto";
+
+service InvestmentService {
+
+	//根据查询条件查询产品
+    rpc QueryPaging (QueryPagingInvestmentRequest) returns (QueryPagingInvestmentResponse) {};
+    
+    //查询
+    rpc QueryList (QueryListInvestmentRequest) returns (QueryListInvestmentResponse) {};
+    
+    
+    //批量更新
+    rpc BatchUpdate (BatchUpdateInvestmentRequest) returns (BatchUpdateInvestmentResponse) {};
+    
+}
+
+message Investment {
+    int64 productId = 1;//产品ID
+    int32 sort = 2;//排序值
+    SiteType siteType = 3;//站点类型
+    PagePosition pagePosition = 4;//网页位置
+    string flag =5;//删除flag,1:逻辑删除,0:未删除
+}
+
+message QueryPagingInvestmentRequest {
+	PagingDto pagingDto = 1;//分页信息
+	Investment investment = 2;
+}
+
+message QueryPagingInvestmentResponse {
+    repeated Investment investment = 1;
+    PagingResultDto pagingResultDto = 2;
+    StatusInfo statusInfo = 3;
+}
+
+message QueryListInvestmentRequest {
+    Investment investment = 1;
+}
+
+message QueryListInvestmentResponse {
+    repeated Investment investment = 1;
+    StatusInfo statusInfo = 2;
+}
+
+message BatchUpdateInvestmentRequest {
+    repeated Investment investment = 1;
+    StatusInfo statusInfo = 2;
+}
+
+message BatchUpdateInvestmentResponse {
+    StatusInfo statusInfo = 1;
+}
+
+enum SiteType {
+	SiteTypeNULL= 0;
+	HRYAPP = 1;//海融易APP
+	SHBKJT = 2;//商户版快捷通
+	HYBKJT = 3;//会员版快捷通
+	HRYYPC = 4;//商户版快捷通
+}
+
+enum PagePosition {
+	PagePositionNULL= 0;
+	BDS = 1;//标的三款产品
+	BK = 2;//爆款小金蟹
+	SKJ = 3;//首页九款产品
+}
+
+
+

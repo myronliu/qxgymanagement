@@ -1,0 +1,165 @@
+//*------------------------------------------------*/
+//*   Base Rules
+//*------------------------------------------------*/
+
+//*==========  变量  ==========*/
+
+//* 配色 */
+$bgColor: #fff;       // 主要背景色
+$ftColor: #333333;		// 主要字体颜色
+$lnkColor: #1C75B8;   // 链接色
+$emColor: #FB373F;    // 重点显示颜色
+$hotColor: #F9815E;   // 热点颜色
+$btnColor: #F74F19;   // 按钮颜色
+$notifyColor: red;    // 提示颜色
+
+$cmptBgColor: #F8F8F8;  // 组件背景色
+$borderColor: #F5F5F5;  // 边框颜色
+$titleColor: #1C1C1C;   // 标题颜色
+
+//* 字体 */
+$baseFontSize: 14px;    // 基础字体大小
+$btnFontSize: 18px;     
+$titleFontSize: 20px;
+
+//* 布局 */
+$pageWidth: 1170px;
+$panelMargin: 20px;
+
+//* 边框 */
+$btnRadius: 4px;
+
+/*==========  Mixins  ==========*/
+
+// * Mixin */
+@mixin li-horizontal {
+  float: left;
+}
+
+@mixin icon-background($url){
+  background: image-url(icons/#{$url}) no-repeat center;
+}
+
+
+//*==========  基础元素样式  ==========*/
+
+body {
+	font: #{$baseFontSize}/1.5 microsoft yahei;
+	padding: 0;
+	margin: 0;
+	color: $ftColor;
+	background: $bgColor;
+        overflow-x:hidden;
+  
+}
+
+em {
+  color: $emColor;
+  font-style: normal;
+}
+
+a {
+  color: $lnkColor;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+//*==========  基础样式类  ==========*/
+
+/* 使float的元素可以撑开父级div */
+.clearfix:after{ 
+  visibility: hidden; 
+  display: block; 
+  font-size: 0; 
+  content: "."; 
+  clear: both; 
+  height: 0; 
+} 
+
+* html .clearfix{zoom: 1;}
+
+*:first-child + html .clearfix{zoom: 1;}
+
+@for $i from 1 to 10 {
+	.f#{12 + $i}{
+		font-size: $baseFontSize + $i;
+	}
+
+  .width#{$i * 10}{
+    width: #{$i/10};
+  }
+
+  .height#{$i * 10}{
+    width: #{$i/10};
+  }
+}
+
+.fl{
+  @include float-left;
+}
+
+.fr {
+  @include float-right;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: "";
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.red{ 
+  color: red; 
+}
+
+//*==========  通用组件样式类  ==========*/
+
+.container {
+  margin: 0px auto;
+}
+
+.msg-icon-panel{
+  text-align: center;
+  width: 50px;
+
+  img {
+    width: 30px;
+  }
+}
+
+.valid-notify {
+  color: $notifyColor;
+  padding: 0px 10px;
+}
+
+//*----提示框样式------
+
+@keyframes toast-in {
+  from {
+    width: 0px;
+  }
+  
+  to {
+    width: 400px;
+  }
+}
+
+@keyframes toast-out {
+  from {
+    width: 400px;
+  }
+
+  to {
+    width: 0px;
+  }
+}
+
+
+
+

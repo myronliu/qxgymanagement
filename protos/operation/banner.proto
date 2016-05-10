@@ -1,0 +1,346 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.operation.stub";
+option java_outer_classname = "BannerProto";
+
+import "../base/base.proto";
+
+service BannerService {
+
+    //根据查询条件查询广告
+    rpc QueryPaging (QueryPagingBannerRequest) returns (QueryPagingBannerResponse) {};
+  
+    //查询广告
+    rpc QueryList (QueryListBannerRequest) returns (QueryListBannerResponse) {};
+    
+    //查询广告
+    rpc GetBannerById (GetBannerByIdRequest) returns (GetBannerByIdResponse) {};
+  
+    //删除广告
+    rpc Remove (RemoveBannerRequest) returns (RemoveBannerResponse) {};
+  
+    //更新广告
+    rpc Update (UpdateBannerRequest) returns (UpdateBannerResponse) {};
+ 
+    //新增广告
+    rpc Create (CreateBannerRequest) returns (CreateBannerResponse) {};
+    
+    //批量更新
+    rpc BatchUpdate (BatchUpdateBannerRequest) returns (BatchUpdateBannerResponse) {};
+    
+    //查询标的详细信息
+    rpc QueryBidInfo (QueryBidInfoRequest) returns (QueryBidInfoResponse) {};
+    
+    //推荐产品页面初始化
+    rpc QueryInitBidInfo (QueryInitBidInfoRequest) returns (QueryInitBidInfoResponse) {};
+    
+    //设置爆款产品信息
+    rpc SaveBkBidInfo (SaveBkBidInfoRequest) returns (SaveBkBidInfoResponse) {};
+    
+    //批量更新
+    rpc BannerSortUpdate (BannerSortUpdateRequest) returns (BannerSortUpdateResponse) {};
+    
+}
+
+message BannerSortUpdateRequest{
+    repeated int32  bannerId = 1;
+}
+
+message BannerSortUpdateResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message SaveBkBidInfoRequest{
+    int32 bidId = 1;
+    string imgLink = 2;
+}
+
+message SaveBkBidInfoResponse{
+    StatusInfo statusInfo = 1;
+}
+
+message QueryInitBidInfoRequest{
+    // 查询结果
+    string bidType = 1;
+}
+
+message QueryInitBidInfoResponse{
+    StatusInfo statusInfo = 1;
+    // 查询结果
+    repeated BidInfo bidInfo = 2;
+}
+
+message QueryBidInfoRequest{
+    // 查询结果
+    repeated int32 bidID = 1;
+}
+
+
+message QueryBidInfoResponse{
+    StatusInfo statusInfo = 1;
+    // 查询结果
+    repeated BidInfo bidInfo = 2;
+}
+
+
+message Banner {
+    //广告管理自增ID
+    int64 bannerId=1;
+    
+    //排序值
+    int32 sort=2;
+    
+    //广告图片标题
+    string imgTitle=3;
+    
+    //图片链接
+    string imgLink=4;
+    
+    //图片编码
+    string imgCode=5;
+    
+    //创建者
+    string creator=6;
+    
+    //上架时间
+    string stockUpTime=7;
+    
+    //下架时间
+    string stockDownTime=8;
+    
+    //创建时间
+    string createdTime=9;
+    
+    //最后修改时间
+    string updatedTime=10;
+    
+    //广告内容
+    string bannerContent=11;
+    
+    //广告位置
+    string position=12;
+    
+    //广告类型
+    string deleteFlag=13;
+    
+    //标的ID
+    int32 bidId = 14;
+    
+    //站点
+    string platform = 15;
+    
+    //标详情
+    BidInfo bidInfo = 16;
+    
+    //点击链接
+    string clickLink = 17;
+    
+    //广告状态
+    StatusType statusType = 18;
+}
+
+enum StatusType {
+    StatusTypeNULL = 0;
+    YXX = 1;//已下线
+    DSX = 2;//待上线
+    SXZ = 3;//上线中
+}
+
+message QueryPagingBannerRequest {
+    PagingDto pagingDto = 1;//分页信息
+    Banner banner = 2;
+}
+
+message QueryPagingBannerResponse {
+    repeated Banner banner = 1;
+    PagingResultDto pagingResultDto = 2;
+    StatusInfo statusInfo = 3;
+}
+
+message QueryListBannerRequest {
+    Banner banner = 1;
+}
+
+message RemoveBannerRequest {
+    Banner banner = 1;
+}
+
+message RemoveBannerResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message UpdateBannerRequest {
+    Banner banner = 1;
+}
+
+message UpdateBannerResponse {
+    StatusInfo statusInfo = 1;
+    int64 bannerId = 2;
+}
+
+message CreateBannerRequest {
+    Banner banner = 1;
+}
+
+message CreateBannerResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message BatchUpdateBannerRequest {
+    repeated int32  bidId = 1;
+    string bidType = 2;
+}
+
+message BatchUpdateBannerResponse {
+    StatusInfo statusInfo = 1;
+}
+
+message GetBannerByIdRequest {
+    Banner banner = 1;
+}
+
+message GetBannerByIdResponse {
+    Banner banner = 1;
+    StatusInfo statusInfo = 2;
+}
+
+message QueryListBannerResponse{
+    StatusInfo statusInfo = 1;
+    // 查询结果
+    repeated Banner banner = 2;
+}
+
+message BidInfo{
+    /**
+     * 标ID
+     */
+    int32 bidId = 1;
+
+    /**
+     * 借款标类型
+     */
+    string bidInfoType = 2;
+
+    /**
+     * 借款标题
+     */
+     string bidTitle = 3;
+
+    /**
+     * 借款金额
+     */
+     double amount = 4;
+
+    /**
+     * 年化利率
+     */
+     double annualizedRate = 5;
+
+    /**
+     * 可投金额
+     */
+     double availAmount = 6;
+
+    /**
+     * 起投金额
+     */
+     double initInvest = 7;
+     
+    /**
+     * 借款周期,单位:月
+     */
+     int32 lifeOfLoan = 8;
+
+    /**
+     * 筹款期限,单位:天
+     */
+     int32 collectDuration = 9;
+     
+    /**
+     * 状态,SQZ:申请中;DSH:待审核;DFB:待发布;YFB:预发布;TBZ:投标中;DFK:待放款;HKZ:还款中;YJQ:已结清;YLB:
+     * 已流标;YDF:已垫付;
+     */
+     string bidInfoStatus  = 10;
+
+    /**
+     * 发布时间,预发布状态有效
+     */
+     string launchDate = 11;
+     
+    /**
+     * 进度(计算出来)
+     */
+     double proess = 12;
+
+    /**
+     * 是否为按天借款,S：是；F：否
+     */
+     string bidInfoloanByDay = 13;
+
+    /**
+     * 借款天数
+     */
+     int32 daysOfLoan = 14;
+     
+    /**
+     * 借款用户Id
+     */
+     int32 borrowerId = 15;
+     
+    /**
+     * 是否有担保,S:是;F:否;
+     */
+     string bidInfoguarantee = 16;
+
+    /**
+     * 是否有抵押,S:是;F:否;
+     */
+     string bidInfomortgage = 17;
+
+    /**
+     * 还款方式,DEBX:等额本息;MYFX:每月付息,到期还本;YCFQ:本息到期一次付清;DEBJ:等额本金;
+     */
+     string bidInfopaymentMethod = 18;
+
+    /**
+     * 担保方案,BXQEDB:本息全额担保;BJQEDB:本金全额担保;
+     */
+     string bidInfoguaranteeMethod = 19;
+
+    /**
+     * 投资上限
+     */
+     double maxInvest = 20;
+
+    /**
+     * 新手基本利率
+     */
+     double fresherBase = 21;
+
+    /**
+     * 新手附加利率
+     */
+     double fresherPlus = 22;
+     
+     /**
+     * 借款人信息
+     */
+     BorrowerInfo borrowerInfo = 23;
+}
+
+message BorrowerInfo {
+    //用户ID
+    int32 borrowerId = 1;
+    
+    //用户登录账号
+    string loginName = 2;
+    
+    //手机号码
+    string cellPhone = 3;
+    
+    //邮箱
+    string email = 4;
+}

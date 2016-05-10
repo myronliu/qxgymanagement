@@ -1,0 +1,21 @@
+//*------------------------------------------------*/
+//* 运营平台图标样式
+//
+//* Created by Ray on 2015-09-05
+//*
+//* 描述：用于提供运营平台图标样式
+//*------------------------------------------------*/
+
+$iconSize: 20px;
+
+i {
+  width: $iconSize;
+  height: $iconSize;
+  display: inline-block;
+
+  &.normal {
+  }
+
+  &.arrow-title { @include icon-background("arrow-title.png"); }
+  &.attach { @include icon-background("attach.png"); }
+}

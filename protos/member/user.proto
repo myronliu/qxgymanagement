@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.member.stub";
+option java_outer_classname = "UserProto";
+
+import "../base/base.proto";
+
+service UserService {
+
+    //根据uerId获取用户信息
+    rpc GetUserByHryId (GetUserByHryIdRequest) returns (GetUserByHryIdResponse) {};
+    
+    // 获取平台所有用户数
+    rpc GetUserCount (GetUserCountRequest) returns (GetUserCountResponse) {};
+}
+
+message GetUserByHryIdRequest{
+	int32 hryId = 1;
+}
+
+message GetUserByHryIdResponse {
+    StatusInfo statusInfo = 1;
+    UserDto user = 2;
+}
+
+message GetUserCountRequest{
+
+}
+
+message GetUserCountResponse{
+	StatusInfo statusInfo = 1;
+	int64 userCount = 2;
+}
+
+message UserDto {
+    //用户ID
+    int32 userId = 1;
+    
+    //用户登录账号
+    string loginName = 2;
+    
+    //手机号码
+    string cellPhone = 3;
+    
+    //邮箱
+    string email = 4;
+    
+    //用户类型
+    UserTypeDto userType = 5;
+    
+    //状态
+    UserStatusDto userStatus = 6;
+    
+    //注册来源
+    UserSourceDto userSource = 7;
+    
+    //注册时间
+    string registrationTime = 8;
+    
+    //担保方
+    bool isGuarantee = 9;
+    
+    //当日提现密码输入错误次数
+    int32 wrongPasswordTimes = 10;
+    
+    //是否第一次登陆系统
+    bool isFirstLogin = 11;
+    
+    //是否删除
+    bool isDeleted = 12;
+}
+
+enum UserTypeDto {
+	USERTYPE_NULL = 0;
+	
+    //自然人
+    ZRR = 1;
+    
+    //非自然人
+    FZRR = 2;
+}
+
+enum UserStatusDto {
+	USERSTATUS_NULL = 0;
+	
+	//启用
+    QY = 1; 
+     
+    //锁定    
+    SD = 2;  
+    
+    //黑名单       
+    HMD = 3;      
+}
+
+enum UserSourceDto {
+	USERSOURCE_NULL = 0;
+	
+	//注册
+    ZC = 1; 
+    
+    //后台添加 
+    HTTJ = 2;      
+}
+
+
+
+
+

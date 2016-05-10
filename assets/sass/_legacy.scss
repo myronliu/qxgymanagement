@@ -1,0 +1,73 @@
+//*------------------------------------------------*/
+//*   遗留样式规则，一般为保持兼容性
+//*------------------------------------------------*/
+.height3em {
+  height: 3em;
+}
+
+.height5em {
+  height: 5em;
+}
+
+.marginTop1em {
+  margin-top: 1em;
+}
+
+.marginLeft20 {
+  margin-left: 20%;
+}
+
+.marginLeft1em {
+  margin-left: 1em;
+}
+
+.displayTable {
+  display: table;
+}
+
+.displayVertical {
+  display: table;
+  vertical-align: middle;
+}
+
+.displayInlineBlock {
+  display: inline-block;
+}
+
+.textAlignRight {
+  text-align: right;
+}
+
+.textAlignCenter {
+  text-align: center;
+}
+
+.textAlignLeft {
+  text-align: left;
+}
+
+.formField {
+  padding: 10px 10px;
+}
+
+.formLabel {
+  text-align: right;
+}
+
+
+/*海融易后台管理专用*/
+.tab{float: left; border-top: solid 1px; border-left: solid 1px; border-right: solid 1px; border-top-left-radius: 6px; border-top-right-radius: 6px; cursor: pointer; width: 150px; height: 30px; line-height: 30px; text-align: center; margin-right: 10px; background-color:#ccc;}
+.tab:hover{background-color:#fff;}
+.tab-cur{float: left; border-top: solid 1px; border-left: solid 1px; border-right: solid 1px; border-top-left-radius: 6px; border-top-right-radius: 6px; width: 150px; height: 30px; line-height: 30px; text-align: center; margin-right: 10px;}
+.marginLeft5px {margin-left: 5px;}
+.pointer{cursor: pointer;}
+
+.pop-background{width: 100%; height: 100%; position: fixed; top: 0; left: 0; opacity: 0.6; z-index: 999; background-color: black;}
+.pop-content{background-color: white; position: fixed; top: 20px; padding: 10px 15px; z-index: 1000; width: 1100px; margin: auto; left: 0; right: 0;}
+.pop-title{height: 40px;}
+.pop-title-left{float: left;line-height: 40px;}
+.pop-title-right{float: right; font-size: 25px; line-height: 40px; width: 25px; text-align: center; cursor: pointer;}
+.searchItemTitle{line-height: 34px; text-align: right;}
+.addAdvertisement-info{line-height: 40px; border: solid 1px; width: 600px; text-align: center; margin: 0px auto;}
+.marginRight0{margin-right: 0px;}
+

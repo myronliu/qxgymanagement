@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.p2p.stub";
+option java_outer_classname = "HryTradeStatProto";
+
+import "../base/base.proto";
+
+service HryTradeStatService {
+
+    //查询rate
+    rpc GetHryTradeAllVol (GetHryTradeAllVolRequest) returns (GetHryTradeAllVolResponse) {};
+}
+
+message GetHryTradeAllVolRequest{
+
+}
+
+message GetHryTradeAllVolResponse {
+    StatusInfo statusInfo = 1;
+    double allVol = 2;
+}
+

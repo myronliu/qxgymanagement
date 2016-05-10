@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package hry.stub;
+
+option java_multiple_files = true;
+option java_package = "com.haier.hairy.stub";
+option java_outer_classname = "ReleaseStatusProto";
+
+enum ReleaseStatus {
+	ReleaseStatusNULL= 0;
+	YFB = 1;//已发布
+	WFB = 2;//未发布
+}

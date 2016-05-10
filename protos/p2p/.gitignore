@@ -1,0 +1,17 @@
+project
+.settings/
+target/
+.classpath
+.springBeans
+*.iml
+.idea
+/build
+*.bak
+.DS_Store
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip

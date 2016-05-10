@@ -1,0 +1,17 @@
+{
+  "apps":[
+    {
+      "name": "hmanager",
+      "script": "/opt/app/hmanager/current/server.js",
+      "watch": false,
+      "log_file"   : "/opt/logs/hmanager/log.log",
+      "error_file" : "/opt/logs/hmanager/err.log",
+      "out_file"   : "/opt/logs/hmanager/out.log",
+      "pid_file"   : "/opt/logs/hmanager/pm2.pid",
+      "env": {
+        "NODE_ENV": "uat"
+      },
+      "port": 3003
+    }
+  ]
+}
