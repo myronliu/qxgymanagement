@@ -205,7 +205,7 @@ router.get('/error', function(req,res){
   _renderPage(reactHtml, req, res, { isMenu: false, title: "出错了" });
 })
 
-router.get('/user/login',function(req,res){
+router.get(['/', '/user/login'],function(req,res){
   var reactHtml = React.renderToString(UserLogin({fromUrl: req.query.fromUrl}));
   _renderPage(reactHtml, req, res, { isMenu: false, title: "后台登录" });
 })
@@ -217,7 +217,7 @@ router.get('/logout',function(req,res){
   return res.redirect('/user/login');
 })
 
-router.get(['/', '/home'],function(req,res){
+router.get('/home',function(req,res){
   var reactHtml = React.renderToString(Home());
 
   _renderPage(reactHtml, req, res, { title: "后台登录"});
