@@ -729,41 +729,45 @@ router.post('/getproducts',function(req,res){
 // 根据id列表获取所有产品列表信息
 router.post('/getproductsbyids',function(req,res){
   console.log("---------->/getproductsbyids");
-  if(req.body.productlist.length == 0){
-    return res.json({status: -1, body:{}, err: "未选中产品"});
-  }else{
-    console.log("解析productlist-------->")
-    var ids = [];
-    var list = req.body.productlist.split(',');
-    for(var i=0; i < list.length; i++){
-      console.log(list[i])
-      ids.push(mongoose.Types.ObjectId(list[i]));
-    }
-    Products.find({'_id':{$in:ids}}, function (err,results) {
-      if(err){
-        console.log('error message',err);
-        return res.json({status: -1, body:{}, err: err});
-      }else{
-        console.log('results',results);
-        var result = {};
-        result.list = results;
-        if(!req.tokenExpired){
-          Address.findOne({account: req.body.account}, 
-            function (err,address) {
-              if(err){
-                console.log('error message',err);
-                return res.json({status: -1, body:{}, err: err});
-              }else{
-                if(address){
-                  result.address = address;
-                }
-                return res.json({status: 0, success: true, body: result});
-              }
-            }
-          );
-        }
+  if(!req.tokenExpired){
+    if(req.body.productlist.length == 0){
+      return res.json({status: -1, body:{}, err: "未选中产品"});
+    }else{
+      console.log("解析productlist-------->")
+      var ids = [];
+      var list = req.body.productlist.split(',');
+      for(var i=0; i < list.length; i++){
+        console.log(list[i])
+        ids.push(mongoose.Types.ObjectId(list[i]));
       }
-    });
+      Products.find({'_id':{$in:ids}}, function (err,results) {
+        if(err){
+          console.log('error message',err);
+          return res.json({status: -1, body:{}, err: err});
+        }else{
+          console.log('results',results);
+          var result = {};
+          result.list = results;
+          if(!req.tokenExpired){
+            Address.findOne({account: req.body.account}, 
+              function (err,address) {
+                if(err){
+                  console.log('error message',err);
+                  return res.json({status: -1, body:{}, err: err});
+                }else{
+                  if(address){
+                    result.address = address;
+                  }
+                  return res.json({status: 0, success: true, body: result});
+                }
+              }
+            );
+          }
+        }
+      });
+    }
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
   }
 })
 
