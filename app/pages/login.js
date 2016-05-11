@@ -21,10 +21,8 @@ var login = React.createClass({
         Cookie.setCookie('token', body.token);
         if(this.props.fromUrl){
           window.to(this.props.fromUrl);
-        }else if(window.history.length<=2){
-          window.to('/');
         }else{
-          window.history.back();
+          window.to('/home');
         }
         debugger;
         break;

@@ -24,7 +24,7 @@ function _reactRender(cmpt, opts){
 React.initializeTouchEvents(true);
 var Router = EvoFlux.createRouter({
   '/': function(){
-    _reactRender(<Home />);
+    _reactRender(<UserLogin fromUrl={this.query('fromUrl')}/>);
   },
   '/home': function(){
     _reactRender(<Home />);
