@@ -15,6 +15,7 @@ var MenusConfig = require('../config/menus');
 var WeixinConfig = require('../config/weixin');
 var qiniu = require('qiniu');
 var token = require('token');
+var md5 = require('md5');
 
 var Admins = require('../models/admin');
 
@@ -650,7 +651,7 @@ router.post('/userpwdreset',function(req,res){
   console.log("---------->/userpwdreset")
   var pwd = Math.ceil(Math.random()*10000000000).toString()
   Users.update({account: req.body.account, email: req.body.email}, {
-      $set: {password:pwd}
+      $set: {password:md5(pwd)}
   }, function(err, result) {
       if(err){
       return res.json({status: -1, body:{}, err: err});
