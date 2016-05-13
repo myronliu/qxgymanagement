@@ -727,6 +727,21 @@ router.post('/getproducts',function(req,res){
     });
 })
 
+// 根据商店获取所有产品列表信息
+router.post('/getproductbyid',function(req,res){
+  console.log("---------->/getproductbyid")
+  Products.findOne({_id: req.body.id}, function (err,results) {
+      if(err){
+        console.log('error message',err);
+        return res.json({status: -1, body:{}, err: err});
+      }else{
+        console.log('results',results);
+        return res.json({status: 0, body:results});
+      }
+    });
+})
+
+
 // 根据id列表获取所有产品列表信息
 router.post('/getproductsbyids',function(req,res){
   console.log("---------->/getproductsbyids");
