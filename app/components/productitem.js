@@ -190,7 +190,7 @@ module.exports = React.createClass({
           <div style={photostyle}>
             <img
               style={imgstyle}
-              src={this.props.data.shopAvatarImg}
+              src={this.props.data.icon}
             />
           </div>
           <div style={contentstyle}>
