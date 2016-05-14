@@ -599,7 +599,7 @@ router.post('/userregister',function(req,res){
   console.log("---------->/userregister")
   // console.log(req.body.name)
 
-  Users.findOne({account: req.body.account, password: req.body.password}, 
+  Users.find({$or:[{"account":req.body.account},{"email": req.body.email}]}, 
     function (err,results) {
       if(err){
         console.log('error message',err);
