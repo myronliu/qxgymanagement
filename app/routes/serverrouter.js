@@ -641,7 +641,7 @@ router.post('/userregister',function(req,res){
         }else{
           console.log("results==============")
           console.log(results)
-          return res.json({status: -1, body:{}, err: "该帐号已经被注册"});
+          return res.json({status: -1, body:{}, err: "该帐号或邮箱已经被注册"});
         }
       }
     }
