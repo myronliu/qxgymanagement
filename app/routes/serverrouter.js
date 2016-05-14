@@ -605,7 +605,7 @@ router.post('/userregister',function(req,res){
         console.log('error message',err);
         return res.json({status: -1, body:{}, err: err});
       }else{
-        if(!results){
+        if(!results || results.length == 0){
           token.defaults.secret = 'qxgy';
           token.defaults.timeStep = 48 * 60 * 60; // 48h in seconds
           var newUser = new Users({
@@ -639,6 +639,8 @@ router.post('/userregister',function(req,res){
             }
           })
         }else{
+          console.log("results==============")
+          console.log(results)
           return res.json({status: -1, body:{}, err: "该帐号已经被注册"});
         }
       }
