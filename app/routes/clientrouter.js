@@ -10,6 +10,8 @@ var ShopManage = require('../pages/shop/manage');
 var ShopEdit = require('../pages/shop/register');
 var ProductManage = require('../pages/product/manage');
 var ProductEdit = require('../pages/product/edit');
+var KechengManage = require('../pages/kecheng/manager');
+var KechengAdd = require('../pages/kecheng/add');
 
 var Error = React.createFactory(require('../pages/error'));
 
@@ -58,6 +60,12 @@ var Router = EvoFlux.createRouter({
   },
   '/productedit': function(){
     _reactRender(<ProductEdit id={this.query('id')} shopId={this.query('shopId')}/>)
+  },
+  '/kecheng': function(){
+    _reactRender(<KechengManage />)
+  },
+  '/questionadd': function(){
+    _reactRender(<KechengAdd id={this.query('id')} />)
   },
 }).configure({html5history:true}).init();
 

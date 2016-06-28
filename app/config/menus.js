@@ -44,6 +44,14 @@ module.exports = {
         "order": 400,
         "subMenus": null,
         "pageName": "weixin"
+      },{
+        "id": "26D312CD89EB6FBEE05342B4A8C0222D",
+        "code": "budget.pg.课程",
+        "name": "课程管理 - /kecheng",
+        "url": "/kecheng",
+        "order": 400,
+        "subMenus": null,
+        "pageName": "kecheng"
       }]
     }]
   }]

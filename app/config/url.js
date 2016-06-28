@@ -16,4 +16,9 @@ module.exports={
     productupdate: '/manager_productupdate',//更新产品信息
     createproduct: '/manager_createproduct',//创建产品
     getproduct: '/manager_getproduct',//根据id获取产品信息
+
+    getquestions: '/manager_getquestions',//获取所有问题列表
+    questionupdate: '/manager_questionupdate',//问题更新
+    questionadd: '/manager_questionadd',//新增问题
+    getquestionbyid: 'manager_getquestionbyid',//根据id查找问题
 }

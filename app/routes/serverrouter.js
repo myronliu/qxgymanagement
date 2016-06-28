@@ -26,6 +26,8 @@ var Orders = require('../models/order');
 var Tokens = require('../models/token');
 var Address = require('../models/address');
 
+var Questions = require('../models/question');
+
 
 qiniu_conf_ACCESS_KEY = "hn_oaWVfveNNJEF73L505oLf9Ivdmh6gKFLLQXmx";
 qiniu_conf_SECRET_KEY = "nqKvTlDfBhpfmCNc-XLYJlc1Ndv2CnIPtzd_1DoP";
@@ -70,6 +72,8 @@ var ProductEdit = React.createFactory(require('../pages/product/edit'));
 
 var GetWeixinToken = require('../actions/weixin/gettoken');
 var WeixinTokenStore = require('../stores/weixin/gettokenstore');
+var KechengManage = React.createFactory(require('../pages/kecheng/manager'));
+var KechengAdd = React.createFactory(require('../pages/kecheng/add'));
 
 if (typeof String.prototype.endsWith !== 'function') {
   String.prototype.endsWith = function(suffix) {
@@ -133,6 +137,10 @@ router.use(function(req,res,next){
     || req.url.endsWith('/manager_productupdate')
     || req.url.endsWith('/manager_getproduct')
     // || req.url.endsWith('/manager_shopregister')
+    || req.url.endsWith('/manager_getquestions')
+    || req.url.endsWith('/manager_questionupdate')
+    || req.url.endsWith('/manager_questionadd')
+    || req.url.endsWith('/manager_getquestionbyid')
   ){
     if(!req.body.token && !req.body.account)
     console.log(req.body.account)
@@ -266,6 +274,19 @@ router.get('/weixin',function(req,res){
   _renderPage(reactHtml, req, res, { title: "微信管理"});
 })
 
+// 课程管理
+router.get('/kecheng',function(req,res){
+  var reactHtml = React.renderToString(KechengManage({id: req.query.id}));
+  
+  _renderPage(reactHtml, req, res, { title: "课程管理"});
+})
+
+// 问题编辑／新增
+router.get('/questionadd',function(req,res){
+  var reactHtml = React.renderToString(KechengAdd({id: req.query.id}));
+  
+  _renderPage(reactHtml, req, res, { title: "课程管理"});
+})
 
 //服务端需要用到的接口－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－＃
 
@@ -552,6 +573,89 @@ router.post('/manager_productupdate',function(req,res){
         return res.json({status: 0, success: true});
       }
     });
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  } 
+})
+
+// 获取所有问题信息
+router.post('/manager_getquestions',function(req,res){
+  console.log("---------->/manager_getquestions")
+  if(!req.tokenExpired){
+    Questions.find({},null, {sort: {'sort':1}}, function (err,results) {
+      if(err){
+        console.log('error message',err);
+        return res.json({status: -1, body:{}, err: err});
+      }else{
+        console.log('results',results);
+        return res.json({status: 0, body:results});
+      }
+    });
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  }
+})
+
+//课程更新
+router.post('/manager_questionupdate',function(req,res){
+  console.log("---------->/manager_questionupdate");
+  if(!req.tokenExpired){
+    Questions.update({_id: req.body.id}, {
+        $set: {
+          title: req.body.title,
+          votesingle: req.body.votesingle,
+          enable: req.body.enable,
+          sort: req.body.sort,
+          creater: req.body.creater
+        }
+    }, function(err) {
+        if(err){
+        return res.json({status: -1, body:{}, err: err});
+      }else{
+        return res.json({status: 0, success: true});
+      }
+    });
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  } 
+})
+
+// 创建问题
+router.post('/manager_questionadd',function(req,res){
+  console.log("---------->/manager_questionadd")
+  if(!req.tokenExpired){
+    var newQuestion = new Questions({
+      title: req.body.title,
+      votesingle: req.body.votesingle,
+      enable: result.enable,
+      sort: result.sort,
+    })
+    newQuestion.save(function(err, product){
+      if(err){
+        return res.json({status: -1, body:{}, err: err});
+      }else{
+        return res.json({status: 0, body:product});
+      }
+    })
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  } 
+})
+
+// 根据问题id查找问题
+router.post('/manager_getquestionbyid',function(req,res){
+  console.log("---------->/manager_getquestionbyid")
+  if(!req.tokenExpired){
+    Questions.findOne({_id: req.body.id}, 
+      function (err,result) {
+        if(err){
+          console.log('error message',err);
+          return res.json({status: -1, body:{}, err: err});
+        }else{
+          return res.json({status: 0, body:result})
+        }
+      }
+    );
   }else{
     return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
   } 
