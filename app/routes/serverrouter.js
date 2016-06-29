@@ -638,8 +638,8 @@ router.post('/manager_questionadd',function(req,res){
     var newQuestion = new Questions({
       title: req.body.title,
       votesingle: req.body.votesingle,
-      enable: result.enable,
-      sort: result.sort,
+      enable: req.body.enable,
+      sort: req.body.sort,
     })
     newQuestion.save(function(err, product){
       if(err){

@@ -50,7 +50,7 @@ module.exports = React.createClass({
   },
 
   onClick: function(){
-    window.to('/shopedit');
+    window.to('/questionadd');
   },
 
   showLoading:function(show) {
