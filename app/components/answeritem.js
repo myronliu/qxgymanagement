@@ -41,17 +41,17 @@ var imgstyle={
   height: "40px",
 };
 var contentstyle={
-  display: "inline-block",
+  display: "block",
   marginLeft: "10px",
-  width: '15%',
-  height: '58px',
+  width: '35%',
+  height: '29px',
   lineHeight: '29px'
 };
 var contentstyleOrder={
-  display: "inline-block",
+  display: "block",
   marginLeft: "10px",
   width: '40%',
-  height: '58px',
+  height: '29px',
   lineHeight: '29px'
 };
 var contentstyleButtons = {
@@ -66,10 +66,13 @@ var shopname={
   fontWeight: "bold"
 };
 var type={
-  fontSize:"10px"
+  fontSize:"10px",
+  display: "inline-block"
 };
 var selfoperation={
-  fontSize:"10px"
+  fontSize:"10px",
+  display: "inline-block",
+  marginLeft:"30px"
 };
 var rightstyle_add={
   display: 'inline-block',
@@ -175,20 +178,7 @@ module.exports = React.createClass({
   componentDidMount: function(){
     
   },
-  handlerDisabled: function(){
-    this.props.handlerDisabled(this.props.data);
-  },
-  handlerEnabled: function(){
-    this.props.handlerEnabled(this.props.data);
-  },
-  handlerEdit: function(){
-    this.props.handlerEdit(this.props.data);
-  },
-  handlerAnswer: function(){
-    this.props.handlerAnswer(this.props.data);
-  },
   render:function(){
-    debugger;
     return (
       <div style={swiper_div}>
         <div style={content}>
@@ -198,28 +188,13 @@ module.exports = React.createClass({
               src={this.props.data.shopAvatarImg}
             />
           </div>
+
           <div style={contentstyle}>
-            <div style={type}>{"序号：" + this.props.data.sort}</div>
-            <div style={selfoperation}>{"可用：" + this.props.data.enable}</div>
+            <div style={type}>{"答题人：" + this.props.data.author}</div>
+            <div style={selfoperation}>{"票数：" + this.props.data.vote}</div>
           </div>
           <div style={contentstyleOrder}>
-            <div style={shopname}>{this.props.data.title}</div>
-            <div style={selfoperation}>{"投票模式：" + this.props.data.votesingle === "Y" ? "单选" : "复选"}</div>
-          </div>
-          <div style={contentstyleButtons}>
-            <div style={right} onClick={this.handlerEdit}>
-              编辑
-            </div>
-            <div style={right} onClick={this.handlerAnswer}>
-              查看答案
-            </div>
-            <div style={this.props.data.enable === "Y" ? rightRed : rightHide} onClick={this.handlerDisabled}>
-              禁用
-            </div>
-            <div style={this.props.data.enable != "Y" ? right : rightHide} onClick={this.handlerEnabled}>
-              启用
-            </div>
-            
+            <div style={shopname}>{"答案：" + this.props.data.answer}</div>
           </div>
         </div>
       </div>

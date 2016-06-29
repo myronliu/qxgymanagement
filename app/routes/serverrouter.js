@@ -27,6 +27,7 @@ var Tokens = require('../models/token');
 var Address = require('../models/address');
 
 var Questions = require('../models/question');
+var Answers = require('../models/answer');
 
 
 qiniu_conf_ACCESS_KEY = "hn_oaWVfveNNJEF73L505oLf9Ivdmh6gKFLLQXmx";
@@ -74,6 +75,7 @@ var GetWeixinToken = require('../actions/weixin/gettoken');
 var WeixinTokenStore = require('../stores/weixin/gettokenstore');
 var KechengManage = React.createFactory(require('../pages/kecheng/manager'));
 var KechengAdd = React.createFactory(require('../pages/kecheng/add'));
+var Answer = React.createFactory(require('../pages/kecheng/answer'));
 
 if (typeof String.prototype.endsWith !== 'function') {
   String.prototype.endsWith = function(suffix) {
@@ -141,6 +143,7 @@ router.use(function(req,res,next){
     || req.url.endsWith('/manager_questionupdate')
     || req.url.endsWith('/manager_questionadd')
     || req.url.endsWith('/manager_getquestionbyid')
+    || req.url.endsWith('/manager_getanswers')
   ){
     if(!req.body.token && !req.body.account)
     console.log(req.body.account)
@@ -284,6 +287,13 @@ router.get('/kecheng',function(req,res){
 // 问题编辑／新增
 router.get('/questionadd',function(req,res){
   var reactHtml = React.renderToString(KechengAdd({id: req.query.id}));
+  
+  _renderPage(reactHtml, req, res, { title: "课程管理"});
+})
+
+// 答案以及投票查看
+router.get('/answers',function(req,res){
+  var reactHtml = React.renderToString(Answer({questionid: req.query.questionid}));
   
   _renderPage(reactHtml, req, res, { title: "课程管理"});
 })
@@ -661,6 +671,25 @@ router.post('/manager_getquestionbyid',function(req,res){
   } 
 })
 
+// 根据问题id获取所有答案以及投票信息
+router.post('/manager_getanswers',function(req,res){
+  console.log("---------->/manager_getanswers")
+  if(!req.tokenExpired){
+    console.log(req.body.questionid)
+    console.log(req.body)
+    Answers.find({questionid: req.body.questionid},null, {sort: {'vote':-1}}, function (err,results) {
+        if(err){
+            console.log('error message',err);
+            return res.json({status: -1, body:{}, err: err});
+        }else{
+          console.log('results',results);
+          return res.json({status: 0, body:results});
+        }
+      });
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  } 
+})
 
 // 客户端需要用到的接口－－－－－－－－－－－－－－－－－－－－－－－－＃
 

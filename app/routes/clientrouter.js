@@ -12,6 +12,7 @@ var ProductManage = require('../pages/product/manage');
 var ProductEdit = require('../pages/product/edit');
 var KechengManage = require('../pages/kecheng/manager');
 var KechengAdd = require('../pages/kecheng/add');
+var Answer = require('../pages/kecheng/answer');
 
 var Error = React.createFactory(require('../pages/error'));
 
@@ -66,6 +67,9 @@ var Router = EvoFlux.createRouter({
   },
   '/questionadd': function(){
     _reactRender(<KechengAdd id={this.query('id')} />)
+  },
+  '/answers': function(){
+    _reactRender(<Answer questionid={this.query('questionid')} />)
   },
 }).configure({html5history:true}).init();
 

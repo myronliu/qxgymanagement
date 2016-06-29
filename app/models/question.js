@@ -9,4 +9,4 @@ var questionScheMa = new Schema({
   creater: String
 });
 
-var shop = module.exports = mongoose.model("questions", questionScheMa);  //  与shops集合关联 
+var question = module.exports = mongoose.model("questions", questionScheMa);  //  与shops集合关联 
