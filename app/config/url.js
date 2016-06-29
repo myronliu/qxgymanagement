@@ -21,5 +21,6 @@ module.exports={
     questionupdate: '/manager_questionupdate',//问题更新
     questionadd: '/manager_questionadd',//新增问题
     getquestionbyid: 'manager_getquestionbyid',//根据id查找问题
-    getanswers: '/manager_getanswers',//根据问题ID获取答案列表以及投票数量
+    getanswers: '/manager_getanswers',//根据问题ID获取答案列表以及投票数量------>弃用
+    getanswervotes: '/getanswervotes'
 }

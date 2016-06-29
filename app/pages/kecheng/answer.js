@@ -21,11 +21,21 @@ module.exports = React.createClass({
         this.showLoading(true);
         ApiAction.post(UrlConfig.getquestions,{});
         break;
-      case UrlConfig.getanswers:
+      case UrlConfig.getanswervotes:
         this.showLoading(false);
+        for(var i=0; i<body.answers.length; i++){
+          for(var j=0; j< body.votes.length; j++){
+            if(body.answers[i]._id === body.votes[j]._id.answerid){
+              body.answers[i].vote = body.votes[j].total;
+            }
+          }
+        }
         this.setState({
-          answers: body
+          answers: body.answers,
         })
+        // this.setState({
+        //   answers: body
+        // })
         break;
     }
   },
@@ -43,7 +53,7 @@ module.exports = React.createClass({
     //先注释掉
     this.showLoading(true);
     console.log(this.props.questionid)
-    ApiAction.post(UrlConfig.getanswers,{questionid: this.props.questionid});
+    ApiAction.post(UrlConfig.getanswervotes,{questionid: this.props.questionid});
   },
   componentWillUnmount: function() {
     //先注释掉

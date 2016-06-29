@@ -28,6 +28,7 @@ var Address = require('../models/address');
 
 var Questions = require('../models/question');
 var Answers = require('../models/answer');
+var Votes = require('../models/vote');
 
 
 qiniu_conf_ACCESS_KEY = "hn_oaWVfveNNJEF73L505oLf9Ivdmh6gKFLLQXmx";
@@ -1092,5 +1093,117 @@ router.post('/updateaddress',function(req,res){
 })
 
 
+// 获取所有可用问题信息
+router.post('/getquestions',function(req,res){
+  console.log("---------->/getquestions")
+  Questions.find({enable:'Y'},null, {sort: {'sort':1}}, function (err,results) {
+    if(err){
+      console.log('error message',err);
+      return res.json({status: -1, body:{}, err: err});
+    }else{
+      console.log('results',results);
+      return res.json({status: 0, body:results});
+    }
+  });
+})
+
+// 批量插入答案表
+router.post('/createanswers',function(req,res){
+  console.log("---------->/createanswers")
+  var arr = [];
+  for(var i=0; i < req.body.list.length; i++){
+    var newAnswer = new Answers({
+      questionid: req.body.list[i].questionid,// 问题编号
+      questiontitle: req.body.list[i].questiontitle,//问题题目
+      answer: req.body.list[i].answer,//问题答案
+      author: req.body.author,//作者
+      vote: "0"
+    })
+    arr.push(newAnswer);
+  }
+  Answers.insertMany(arr, function(err, docs) {
+    if(err){
+      console.log("------------>Answers insertMany error")
+      return res.json({status: -1, body:{}, err: err});
+    }else{
+      console.log("------------>Answers insertMany success")
+      return res.json({status: 0, body:docs});
+      // return res.json({status: 0, body:docs});
+    }
+  });
+})
+
+// 根据问题id获取答案列表
+router.post('/getanswers',function(req,res){
+  console.log("---------->/getanswers")
+  Answers.find({questionid:req.body.questionid},null, null, function (err,results) {
+    if(err){
+      console.log('error message',err);
+      return res.json({status: -1, body:{}, err: err});
+    }else{
+      console.log('results',results);
+      return res.json({status: 0, body:results});
+    }
+  });
+})
+
+
+// 对答案进行投票
+router.post('/answersvote',function(req,res){
+  console.log("---------->/answersvote")
+  var arr = [];
+  for(var i=0; i < req.body.list.length; i++){
+    var newVote = new Votes({
+      questionid: req.body.list[i].questionid,// 问题编号
+      answerid: req.body.list[i].answerid,//答案编号
+      answer: req.body.list[i].answer,//问题答案
+      author: req.body.list[i].author,//作者
+      voter: req.body.voter//投票人
+    })
+    arr.push(newVote);
+  }
+  Votes.insertMany(arr, function(err, docs) {
+    if(err){
+      console.log("------------>Votes insertMany error")
+      return res.json({status: -1, body:{}, err: err});
+    }else{
+      console.log("------------>Votes insertMany success")
+      return res.json({status: 0, body:docs});
+    }
+  });
+})
+
+// 获取投票数
+router.post('/getanswervotes',function(req,res){
+  console.log("---------->/getanswervotes")
+  // console.log(req.body.name)
+
+  Answers.find({questionid:req.body.questionid}, 
+    function (err,results) {
+      if(err){
+        console.log('error message',err);
+        return res.json({status: -1, body:{}, err: err});
+      }else{
+        if(!results || results.length == 0){
+          return res.json({status: 0, body:{}});
+        }else{
+          Votes.aggregate([
+            { $match:  {questionid:req.body.questionid}},
+            { $group:  {_id:{answerid: "$answerid"}, total:{$sum: 1} }},
+          ],function(e,docs){
+              if(e){
+                console.log("------------>getanswervotes error")
+                console.log(e.message);
+                return res.json({status: -1, body:{}, err: err});
+              }else{
+                return res.json({status: 0, body:{answers:results,votes:docs}});
+              }
+            }
+          );  
+        };
+      }
+    }
+  );
+})
 
 module.exports = router;
