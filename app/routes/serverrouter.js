@@ -1133,6 +1133,27 @@ router.post('/createanswers',function(req,res){
   });
 })
 
+//答案更新
+router.post('/updateanswer',function(req,res){
+  console.log("---------->/updateanswer")
+  Answers.update({_id: req.body.id}, {
+    $set: {
+      questionid: req.body.questionid,
+      questiontitle: req.body.questiontitle,
+      answer: req.body.answer,
+      author: req.body.author,
+      vote: '0'
+    }
+  }, function(err) {
+    if(err){
+      return res.json({status: -1, body:{}, err: err});
+    }else{
+      return res.json({status: 0, success: true});
+    }
+  });
+})
+
+
 // 根据问题id获取答案列表
 router.post('/getanswers',function(req,res){
   console.log("---------->/getanswers")
