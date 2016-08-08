@@ -145,6 +145,7 @@ router.use(function(req,res,next){
     || req.url.endsWith('/manager_questionadd')
     || req.url.endsWith('/manager_getquestionbyid')
     || req.url.endsWith('/manager_getanswers')
+    || req.url.endsWith('/manager_delanswers')
   ){
     if(!req.body.token && !req.body.account)
     console.log(req.body.account)
@@ -679,6 +680,25 @@ router.post('/manager_getanswers',function(req,res){
     console.log(req.body.questionid)
     console.log(req.body)
     Answers.find({questionid: req.body.questionid},null, {sort: {'vote':-1}}, function (err,results) {
+        if(err){
+            console.log('error message',err);
+            return res.json({status: -1, body:{}, err: err});
+        }else{
+          console.log('results',results);
+          return res.json({status: 0, body:results});
+        }
+      });
+  }else{
+    return res.json({status: -1, body:{}, err: "用户未登录或者登录过期"});
+  } 
+})
+
+// 根据答案id删除答案
+router.post('/manager_delanswers',function(req,res){
+  console.log("---------->/manager_delanswers")
+  if(!req.tokenExpired){
+    console.log(req.body.answerid)
+    Answers.remove({_id: req.body.answerid}, function (err,results) {
         if(err){
             console.log('error message',err);
             return res.json({status: -1, body:{}, err: err});

@@ -48,7 +48,7 @@ var contentstyle={
   lineHeight: '29px'
 };
 var contentstyleOrder={
-  display: "block",
+  display: "inline-block",
   marginLeft: "10px",
   width: '40%',
   height: '29px',
@@ -172,11 +172,13 @@ module.exports = React.createClass({
   },
   getInitialState: function(){
     return {
-      count: 0
+      count: 0,
+      show: false
     }
   },
-  componentDidMount: function(){
-    
+  
+  handlerDelete: function(){
+    this.props.handlerDelete(this.props.data);
   },
   render:function(){
     return (
@@ -195,6 +197,9 @@ module.exports = React.createClass({
           </div>
           <div style={contentstyleOrder}>
             <div style={shopname}>{"答案：" + this.props.data.answer}</div>
+          </div>
+          <div style={right} onClick={this.handlerDelete}>
+            删除
           </div>
         </div>
       </div>

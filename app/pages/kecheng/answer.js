@@ -17,11 +17,12 @@ module.exports = React.createClass({
   
   apiSuccess:function(url,body){
     switch(url){
-      case UrlConfig.questionupdate:
+      case UrlConfig.delanswers:
         this.showLoading(true);
-        ApiAction.post(UrlConfig.getquestions,{});
+        ApiAction.post(UrlConfig.getanswervotes,{questionid: this.props.questionid});
         break;
       case UrlConfig.getanswervotes:
+        debugger;
         this.showLoading(false);
         for(var i=0; i<body.answers.length; i++){
           for(var j=0; j< body.votes.length; j++){
@@ -33,9 +34,6 @@ module.exports = React.createClass({
         this.setState({
           answers: body.answers,
         })
-        // this.setState({
-        //   answers: body
-        // })
         break;
     }
   },
@@ -66,8 +64,12 @@ module.exports = React.createClass({
 
   renderItem: function(){
     this.items = this.state.answers.map(function(item, i){
-      return <AnswerItem key={i} data={item} />
+      return <AnswerItem key={i} data={item} handlerDelete={this.handlerDelete.bind(this)}/>
     }.bind(this)); 
+  },
+  handlerDelete:function(data){
+    this.showLoading(true);
+    ApiAction.post(UrlConfig.delanswers,{answerid: data._id});
   },
 
   handlerEdit: function(data){
