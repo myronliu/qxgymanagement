@@ -1156,21 +1156,57 @@ router.post('/createanswers',function(req,res){
 //答案更新
 router.post('/updateanswer',function(req,res){
   console.log("---------->/updateanswer")
-  Answers.update({_id: req.body.id}, {
-    $set: {
-      questionid: req.body.questionid,
-      questiontitle: req.body.questiontitle,
-      answer: req.body.answer,
-      author: req.body.author,
-      vote: '0'
-    }
-  }, function(err) {
-    if(err){
-      return res.json({status: -1, body:{}, err: err});
+  Answers.findOne({_id: req.body.id}, function (err,results) {
+    if(err || !results || results.length == 0){
+      console.log("---------->/updateanswer: add")
+      var newAnswer = new Answers({
+        questionid: req.body.questionid,// 问题编号
+        questiontitle: req.body.questiontitle,//问题题目
+        answer: req.body.answer,//问题答案
+        author: req.body.author,//作者
+        vote: "0"
+      })
+      newAnswer.save(function(err, answer){
+        if(err){
+          return res.json({status: -1, body:{}, err: err});
+        }else{
+          return res.json({status: 0, body:answer});
+        }
+      })
     }else{
-      return res.json({status: 0, success: true});
+      console.log("---------->/updateanswer: update")
+      Answers.update({_id: req.body.id}, {
+        $set: {
+          questionid: req.body.questionid,
+          questiontitle: req.body.questiontitle,
+          answer: req.body.answer,
+          author: req.body.author,
+          vote: '0'
+        }
+      }, function(err) {
+        if(err){
+          return res.json({status: -1, body:{}, err: err});
+        }else{
+          return res.json({status: 0, success: true});
+        }
+      });
     }
   });
+  // Answers.update({_id: req.body.id}, {
+  //   $set: {
+  //     questionid: req.body.questionid,
+  //     questiontitle: req.body.questiontitle,
+  //     answer: req.body.answer,
+  //     author: req.body.author,
+  //     vote: '0'
+  //   }
+  // }, function(err) {
+  //   if(err){
+  //     return res.json({status: -1, body:{}, err: err});
+  //   }else{
+  //     return res.json({status: 0, success: true});
+  //   }
+  // });
 })
 
 
